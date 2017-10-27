@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true"/>
+    <!--将struts2中的对象创建交给spring完成-->
+    <constant name="struts.objectFactory" value="spring"/>
+
+    <package name="HRD" extends="json-default">
+        <!--登录系统-->
+        <action name="login" class="staffAction" method="login">
+            <result name="success">/pages/frame.jsp</result>
+            <result name="error">/pages/login.jsp</result>
+            <result name="input">/pages/login.jsp</result>
+        </action>
+
+        <!--查询所有部门-->
+        <action name="findAllDept" class="com.lanou.hrd.action.DeptAction">
+            <result name="success">pages/department/listDepartment.jsp</result>
+        </action>
+        <!--添加/编辑部门-->
+        <action name="addDepartment" class="com.lanou.hrd.action.DeptAction" method="addOrEditDepartment">
+            <result name="success" type="chain">findAllDept</result>
+            <result name="input">/pages/department/addOrEditDepartment.jsp</result>
+        </action>
+
+
+        <!--查询所有职务-->
+        <action name="findAllPost" class="com.lanou.hrd.action.PostAction">
+            <result name="success">pages/post/listPost.jsp</result>
+        </action>
+        <!--添加/编辑职务-->
+        <action name="findAllDeptInPost" class="com.lanou.hrd.action.PostAction" method="findAllDept">
+            <result name="success">/pages/post/addOrEditPost.jsp</result>
+        </action>
+        <action name="addPost" class="com.lanou.hrd.action.PostAction" method="addOrEditPost">
+            <result name="success" type="chain">findAllPost</result>
+            <result name="input">/pages/post/addOrEditPost.jsp</result>
+        </action>
+
+
+        <!--查询所有部门-->
+        <action name="listDept" class="staffAction" method="findAllDept">
+            <result name="success" type="json">
+                <param name="root">departments</param>
+            </result>
+            <result name="input" type="redirect">/pages/staff/addStaff.jsp</result>
+        </action>
+        <!--根据部门id获得该部门下的所有职务集合-->
+        <action name="listPost" class="staffAction" method="findPostByDeptId">
+            <result name="success" type="json">
+                <param name="root">posts</param>
+            </result>
+        </action>
+        <!--添加员工-->
+        <action name="addStaff" class="staffAction" method="addStaff">
+            <result name="success" type="chain">listStaff</result>
+            <result name="input" >/pages/staff/addStaff.jsp</result>
+        </action>
+        <!--编辑员工-->
+        <action name="editStaff" class="staffAction" method="editStaff">
+            <result name="success" >/pages/staff/editStaff.jsp</result>
+        </action>
+        <action name="updateStaff" class="staffAction" method="updateStaff">
+            <result name="success" type="chain">listStaff</result>
+            <result name="input" type="chain">editStaff</result>
+        </action>
+
+
+        <!--查询所有员工-->
+        <action name="listStaff" class="staffAction" method="listStaff">
+            <result name="success">/pages/staff/listStaff.jsp</result>
+            <result name="input">/pages/staff/listStaff.jsp</result>
+        </action>
+        <!--条件查询-->
+        <action name="queryStaff" class="staffAction" method="queryStaff">
+            <result name="success">/pages/staff/listStaff.jsp</result>
+        </action>
+
+
+        <!--修改密码-->
+        <action name="updPwd" class="staffAction" method="updPwd">
+            <result name="success" type="redirect">/pages/frame.jsp</result>
+            <result name="input">/pages/staff/updPwd.jsp</result>
+        </action>
+        <!--退出登录-->
+        <action name="outLogin" class="staffAction" method="outLogin">
+            <result name="success">/pages/login.jsp</result>
+        </action>
+    </package>
+
+</struts>
