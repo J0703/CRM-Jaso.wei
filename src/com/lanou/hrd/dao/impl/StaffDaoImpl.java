@@ -17,7 +17,19 @@ public class StaffDaoImpl extends BaseDaoImpl<Staff> implements StaffDao {
         Object[] params = {name,pwd};
 
         List<Staff> staffs = find(hql, params);
-        System.out.println("登录信息 : "+staffs +"---"+name+pwd);
+        System.out.println("登录信息 : "+staffs );
+        if (staffs.size()>0) {
+            return staffs.get(0);
+        }
+        return null;
+    }
+
+    @Override
+    public Staff findByNAme(String loginName) {
+        String hql ="from Staff where loginName =?";
+        Object[] params = {loginName};
+
+        List<Staff> staffs = find(hql, params);
         if (staffs.size()>0) {
             return staffs.get(0);
         }

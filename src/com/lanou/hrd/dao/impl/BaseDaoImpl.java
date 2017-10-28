@@ -1,9 +1,13 @@
 package com.lanou.hrd.dao.impl;
 
 import com.lanou.hrd.dao.BaseDao;
+import com.lanou.hrd.page.PageHibernateCallback;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,15 +16,31 @@ import java.util.Map;
 /**
  * Created by dllo on 17/10/24.
  */
+
+@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
 
 
     @Override
-    public List<T> findAll(String hql) {
-        Session session = currentSession();
+    public int getTotalRecord(String condition, Object[] params) {
+        List<Long> lists = (List<Long>) this.getHibernateTemplate().find(condition,params);
+        if (lists != null){
+            return lists.get(0).intValue();
+        }
+        return 0;
+    }
 
-        Query query = session.createQuery(hql);
-        List<T> list = query.list();
+    @Override
+    public List<T> findAll(String hql, Object[] params, int startIndex, int pageSize) {
+        return this.getHibernateTemplate().execute(
+                new PageHibernateCallback<T>(hql,params,startIndex,pageSize));
+    }
+
+    ////////////////////////////////////////////////////
+    @Override
+    public List<T> findAll(String hql) {
+
+        List<T> list = (List<T>) getHibernateTemplate().find(hql);
 
         return list;
     }

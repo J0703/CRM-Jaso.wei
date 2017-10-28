@@ -49,6 +49,7 @@
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
             <tx:method name="add*"/>
+            <tx:method name="save*"/>
             <tx:method name="delete*"/>
             <tx:method name="update*"/>
             <tx:method name="find*"/>
@@ -80,6 +81,10 @@
           class="com.lanou.hrd.dao.impl.PostDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    <bean id="courseDao"
+          class="com.lanou.trd.dao.impl.CourseDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 
     <!--配置service层-->
     <bean id="staffService"
@@ -93,6 +98,10 @@
     <bean id="postService"
           class="com.lanou.hrd.service.impl.PostServiceImpl">
         <property name="postDao" ref="postDao"/>
+    </bean>
+    <bean id="courseService"
+          class="com.lanou.trd.service.impl.CourseServiceImpl">
+        <property name="courseDao" ref="courseDao"/>
     </bean>
 
 

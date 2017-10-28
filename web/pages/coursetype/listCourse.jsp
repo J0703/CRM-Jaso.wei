@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -23,10 +24,11 @@
     <td width="39%" align="left">[课程类别]</td>
    
     <td width="57%"align="right">
+		<%--高级查询--%>
 		<a href="javascript:void(0)" onclick="javascript:document.forms[0].submit();">
 			<img src="${pageContext.request.contextPath}/images/button/gaojichaxun.gif" />
 		</a>      
-    	<%--编辑前：添加类别 --%>
+    	<%--添加类别 --%>
     	<a href="${pageContext.request.contextPath}/pages/coursetype/addOrEditCourse.jsp">
 	       	<img src="${pageContext.request.contextPath}/images/button/tianjia.gif" />
     	</a>
@@ -38,7 +40,7 @@
 
 <%--条件查询 start --%>
 
-<form action="${pageContext.request.contextPath}/coursetype/courseTypeAction_findAll.action" method="post">
+<form action="${pageContext.request.contextPath}/advFindCourse.action" method="post">
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	  <tr>
 	    <td width="10%">课程类别：</td>
@@ -76,43 +78,34 @@
 	<td width="11%" align="center">编辑</td>
   </tr>
   <%--数据展示，单行：tabtd1；双行：tabtd2 --%>
+	<c:forEach items="${courses}" var="course">
    <tr class="tabtd1">
-	    <td align="center">JavaEE </td>
-	    <td align="center"> </td>
-	    <td align="center">1000</td>
-	    <td align="center">3000.0</td>
+	    <td align="center">${course.courseName}</td>
+	    <td align="center">${course.remark}</td>
+	    <td align="center">${course.total}</td>
+	    <td align="center">${course.courseCost}</td>
 	  	<td width="11%" align="center">
 	  		
-	  		<a href="${pageContext.request.contextPath}/pages/coursetype/addOrEditCourse.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
+	  		<a href="${pageContext.request.contextPath}/editCourse.action?courseTypeID=${course.courseTypeID}"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
 	  	</td>
 	  </tr>
-  
- 
-	  <tr class="tabtd2">
-	    <td align="center">JavaEE </td>
-	    <td align="center"> </td>
-	    <td align="center">6000</td>
-	    <td align="center">18000.0</td>
-	  	<td width="11%" align="center">
-	  		
-	  		<a href="${pageContext.request.contextPath}/pages/coursetype/addOrEditCourse.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" /></a>
-	  	</td>
-	  </tr>
+	</c:forEach>
 
- 
-</table>
-<table border="0" cellspacing="0" cellpadding="0" align="center">
-  <tr>
-    <td align="right">
-    	<span>第1/3页</span>
-        <span>
-        	<a href="#">[首页]</a>&nbsp;&nbsp;
-            <a href="#">[上一页]</a>&nbsp;&nbsp;
-            <a href="#">[下一页]</a>&nbsp;&nbsp;
-            <a href="#">[尾页]</a>
-        </span>
-    </td>
-  </tr>
-</table>
+
+ <%----%>
+<%--</table>--%>
+<%--<table border="0" cellspacing="0" cellpadding="0" align="center">--%>
+  <%--<tr>--%>
+    <%--<td align="right">--%>
+    	<%--<span>第1/3页</span>--%>
+        <%--<span>--%>
+        	<%--<a href="#">[首页]</a>&nbsp;&nbsp;--%>
+            <%--<a href="#">[上一页]</a>&nbsp;&nbsp;--%>
+            <%--<a href="#">[下一页]</a>&nbsp;&nbsp;--%>
+            <%--<a href="#">[尾页]</a>--%>
+        <%--</span>--%>
+    <%--</td>--%>
+  <%--</tr>--%>
+<%--</table>--%>
 </body>
 </html>

@@ -48,7 +48,7 @@
         <td width="7%" align="center">编辑</td>
     </tr>
 
-    <c:forEach var="dept" items="${departments}">
+    <c:forEach var="dept" items="${pageBean.data}">
         <tr class="tabtd">
             <td align="center">${dept.depName}</td>
             <td width="7%" align="center">
@@ -62,18 +62,23 @@
 </table>
 
 
-<%--<table border="0" cellspacing="0" cellpadding="0" align="center">--%>
-<%--<tr>--%>
-<%--<td align="right">--%>
-<%--<span>第1/3页</span>--%>
-<%--<span>--%>
-<%--<a href="#">[首页]</a>&nbsp;&nbsp;--%>
-<%--<a href="#">[上一页]</a>&nbsp;&nbsp;--%>
-<%--<a href="#">[下一页]</a>&nbsp;&nbsp;--%>
-<%--<a href="#">[尾页]</a>--%>
-<%--</span>--%>
-<%--</td>--%>
-<%--</tr>--%>
-<%--</table>--%>
+<table border="0" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+        <td align="center">
+            <span>
+                <s:if test="#pageBean.pageNum gt 1">
+                    <a href="${pageContext.request.contextPath}/findAllDept.action?pageNum=1">[首页]</a>&nbsp;&nbsp;
+                    <a href="${pageContext.request.contextPath}/findAllDept.action?pageNum=<s:property value="#pageBean.pageNum - 1"/>">[上一页]</a>&nbsp;&nbsp;
+                </s:if>
+                <s:if test="#pageBean.pageNum lt #pageBean.totalPage">
+                    <a href="${pageContext.request.contextPath}/findAllDept.action?pageNum=<s:property value="#pageBean.pageNum + 1"/>">[下一页]</a>&nbsp;&nbsp;
+                    <a href="${pageContext.request.contextPath}/findAllDept.action?pageNum=<s:property value="#pageBean.totalPage"/>">[尾页]</a>
+                </s:if>
+            </span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>第<s:property value="#pageBean.pageNum"/>/<s:property value="#pageBean.totalPage"/>页</span>
+        </td>
+    </tr>
+</table>
 </body>
+
 </html>

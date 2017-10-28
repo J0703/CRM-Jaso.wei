@@ -9,4 +9,5 @@ public interface StaffDao extends BaseDao<Staff> {
 
     Staff login(String name,String pwd);
 
+    Staff findByNAme(String loginName);
 }

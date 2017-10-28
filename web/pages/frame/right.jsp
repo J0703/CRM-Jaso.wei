@@ -25,8 +25,8 @@ setInterval("timeStr=new Date().toLocaleString();timer.innerText=timeStr;",1000)
 			<font size="6" color="#ffffff">
 						欢迎使用CRM系统
 			</font>  
-			 
-			<span id="timer" style="font:11px tahoma;height:10px;" />		
+
+			<p id="timer" style="font:48px tahoma;height:10px;" />
 			</td>
 		</tr>
 	</table>

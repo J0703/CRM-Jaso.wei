@@ -32,7 +32,7 @@
   </tr>
 </table>
 
-<form action="${pageContext.request.contextPath}/pages/classesm/listClass.jsp" method="post">
+<form action="${pageContext.request.contextPath}" method="post">
 	
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	  <tr>

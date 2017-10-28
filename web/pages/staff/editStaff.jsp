@@ -108,13 +108,13 @@
                     <option value="-1">----请--选--择----</option>
                     <c:forEach var="dept" items="${departments}">
                         <c:if test="${staff1.post.department.depID == dept.depID}">
-                        <c:forEach var="post" items="${dept.posts}">
-                        <option value="${post.postId}"
-                                <c:if test="${post.postId == staff1.post.postId}">
-                                    selected="selected"
-                                </c:if>
-                        >${post.postName}</option>
-                        </c:forEach>
+                            <c:forEach var="post" items="${dept.posts}">
+                                <option value="${post.postId}"
+                                        <c:if test="${post.postId == staff1.post.postId}">
+                                            selected="selected"
+                                        </c:if>
+                                >${post.postName}</option>
+                            </c:forEach>
                         </c:if>
                     </c:forEach>
                 </select>

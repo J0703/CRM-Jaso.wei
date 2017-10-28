@@ -1,7 +1,9 @@
 package com.lanou.hrd.action;
 
 import com.lanou.hrd.domain.Department;
+import com.lanou.hrd.domain.PageBean;
 import com.lanou.hrd.service.DepartmentService;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,10 @@ import java.util.List;
  */
 public class DeptAction extends ActionSupport implements ModelDriven<Department> {
 
-    private Department department;
+    private Department department;//bean
+    private int pageNum;//第一页开始
+    private int pageSize=3;//每页显示三条
+
 
     @Autowired
     @Qualifier("departmentService")
@@ -27,12 +32,16 @@ public class DeptAction extends ActionSupport implements ModelDriven<Department>
         return department;
     }
 
+
+
     /**
      * 查询所有部门
      */
     @Override
     public String execute() throws Exception {
-        departments = departmentService.findAllDept();
+        PageBean<Department> pageBean = departmentService.findAll(department, pageNum, pageSize);
+        System.out.println("pageBean : "+pageBean);
+        ActionContext.getContext().put("pageBean",pageBean);
         return SUCCESS;
     }
 
@@ -40,7 +49,6 @@ public class DeptAction extends ActionSupport implements ModelDriven<Department>
      * 添加/编辑 部门
      */
     public String addOrEditDepartment(){
-        System.out.println("表单 : "+department.getDepID()+">>>"+department);
         if (department.getDepName().trim().equals("")){
             addActionError("请填写完整!");
             return INPUT;
@@ -80,6 +88,24 @@ public class DeptAction extends ActionSupport implements ModelDriven<Department>
     }
 
     public void setDepartments(List<Department> departments) {
+
+
         this.departments = departments;
+    }
+
+    public int getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(int pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 }

@@ -2,6 +2,7 @@ package com.lanou.hrd.service.impl;
 
 import com.lanou.hrd.dao.DepartmentDao;
 import com.lanou.hrd.domain.Department;
+import com.lanou.hrd.domain.PageBean;
 import com.lanou.hrd.service.DepartmentService;
 
 import java.util.HashMap;
@@ -14,6 +15,29 @@ import java.util.Map;
 public class DepartmentServiceImpl implements DepartmentService {
 
     private DepartmentDao departmentDao;
+
+    @Override
+    public PageBean<Department> findAll(Department department, int pageNum, int pageSize) {
+        if (pageNum == 0) pageNum++;
+        String hql = "select count(d) from Department d where 1=1";
+        Object[] params={};
+        String hql2 = "from Department";
+        //总记录数
+        int totalRecord = departmentDao.getTotalRecord(hql,params);
+        if (totalRecord==0) totalRecord++;
+        System.out.println("总记录数 : "+totalRecord);
+        //创建对象
+        PageBean<Department> pageBean =new PageBean<Department>();
+        pageBean.setPageNum(pageNum);
+        pageBean.setPageSize(pageSize);
+        pageBean.setTotalRecord(totalRecord);
+        //分页数据
+        List<Department> data = departmentDao.findAll(hql2,params,pageBean.getStartIndex(),pageBean.getPageSize());
+        //将分页数据封装到pagebean
+        pageBean.setData(data);
+
+        return pageBean;
+    }
 
     @Override
     public void add(Department department) {
@@ -30,13 +54,6 @@ public class DepartmentServiceImpl implements DepartmentService {
         departmentDao.update(department);
     }
 
-    @Override
-    public Department findSingle(String depName) {
-        String hql = "from Department where depName =:na";
-        Map<String ,Object> params = new HashMap();
-        params.put("na",depName);
-        return departmentDao.findSingle(hql,params);
-    }
 
     @Override
     public Department findById(String depId) {

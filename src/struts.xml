@@ -6,11 +6,46 @@
 
 <struts>
 
+    <!--开发者模式-->
     <constant name="struts.devMode" value="true"/>
     <!--将struts2中的对象创建交给spring完成-->
     <constant name="struts.objectFactory" value="spring"/>
 
+
+    <!--人力资源部-->
     <package name="HRD" extends="json-default">
+
+
+        <interceptors>
+            <!--声明登录拦截器-->
+            <interceptor name="loginCheck" class="com.lanou.hrd.interceptor.LoginInterceptor"/>
+
+
+            <!--声明一个拦截器集合, 将多个拦截器放在一个stack栈中-->
+            <interceptor-stack name="myInterceptorStack">
+
+                <!--.登录拦截器加入自定义拦截器栈-->
+                <interceptor-ref name="loginCheck">
+                    <!--添加拦截条件-->
+                    <!--排除拦截方法, 多个方法 , 隔开-->
+                    <param name="excludeMethods">login,findAllDept,findAllPost,listStaff</param>
+                </interceptor-ref>
+
+                <!--***将struts提供的默认拦截器栈加入自定义拦截器栈在 此种方式保证了原来struts提供的拦截器仍然好用
+                如果不加defaultStack,则使用自定义拦截器时原struts拦截器不好用-->
+                <interceptor-ref name="defaultStack"/>
+
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="myInterceptorStack"/>
+        <global-results>
+            <result name="login">/pages/login.jsp</result>
+            <result name="error">/pages/error.jsp</result>
+        </global-results>
+
+
+
         <!--登录系统-->
         <action name="login" class="staffAction" method="login">
             <result name="success">/pages/frame.jsp</result>
@@ -84,12 +119,34 @@
 
         <!--修改密码-->
         <action name="updPwd" class="staffAction" method="updPwd">
-            <result name="success" type="redirect">/pages/frame.jsp</result>
+            <result name="success">/pages/frame/right.jsp</result>
             <result name="input">/pages/staff/updPwd.jsp</result>
         </action>
         <!--退出登录-->
         <action name="outLogin" class="staffAction" method="outLogin">
-            <result name="success">/pages/login.jsp</result>
+            <result name="success" type="redirect">/pages/login.jsp</result>
+        </action>
+    </package>
+
+    <!--教研部-->
+    <package name="TRD" extends="json-default">
+
+        <!--添加/编辑课程-->
+        <action name="addOrEditCourse" class="courseAction" method="addOrEditCourse">
+            <result name="success" type="chain">findAllCourse</result>
+            <result name="input">/pages/coursetype/addOrEditCourse.jsp</result>
+        </action>
+        <action name="editCourse" class="courseAction" method="editCourse">
+            <result name="success">/pages/coursetype/addOrEditCourse.jsp</result>
+        </action>
+
+        <!--查询所有课程-->
+        <action name="findAllCourse" class="courseAction" method="findAllCourse">
+            <result name="success">/pages/coursetype/listCourse.jsp</result>
+        </action>
+        <!--高级查询-->
+        <action name="advFindCourse" class="courseAction" method="advFindCourse">
+            <result name="success">/pages/coursetype/listCourse.jsp</result>
         </action>
     </package>
 

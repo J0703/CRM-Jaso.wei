@@ -1,6 +1,7 @@
-package com.lanou.hrd.test;
+package com.lanou.test;
 
 import com.lanou.hrd.action.StaffAction;
+import com.lanou.trd.action.CourseAction;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -21,8 +22,10 @@ public class MainTest {
 
     @Test
     public void test(){
-        StaffAction staffAction = (StaffAction) context.getBean("staffAction");
-        staffAction.listStaff();
+//        StaffAction staffAction = (StaffAction) context.getBean("staffAction");
+//        staffAction.listStaff();
+        CourseAction courseAction = (CourseAction) context.getBean("courseAction");
+        courseAction.advFindCourse();
 
     }
 }

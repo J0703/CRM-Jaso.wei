@@ -82,44 +82,25 @@
 			<a href="${pageContext.request.contextPath}/pages/classesm/downloadClass">下载</a> <br/>
 		</td>
 	  </tr>
-	  <tr class="tabtd1">
-	    <td align="center">J161002期</td>
-	    <td align="center">JavaEE </td>
-	    <td align="center">2016-11-10</td>
-	    <td align="center">2016-12-10</td>
-	    <td align="center">已开班</td>
-	    <td align="center">0 </td>
-	    <td align="center">0 </td>
-	    <td align="center">0 </td>
-	    <td align="center">
-	    	<a href="${pageContext.request.contextPath}/classesm/classAction_preAddOrEdit.action?classId=2c9091c14c78e58b014c78e9106e000b"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>
-	    </td>
-		<td align="center">
-	    	<a href="${pageContext.request.contextPath}/classesm/classAction_findById.action?classId=2c9091c14c78e58b014c78e9106e000b"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>
-		</td>
-		<td align="center" title="上次上传时间：">   
-			<a href="${pageContext.request.contextPath}/classesm/classAction_preUpload.action?classId=2c9091c14c78e58b014c78e9106e000b">上传</a>
-			 暂无
-		</td>
-	  </tr>
+
   
   </tbody>
 </table>
 
 
-<table border="0" cellspacing="0" cellpadding="0" align="center">
-  <tr>
-    <td align="right">
-    	<span>第1/3页</span>
-        <span>
-        	<a href="#">[首页]</a>&nbsp;&nbsp;
-            <a href="#">[上一页]</a>&nbsp;&nbsp;
-            <a href="#">[下一页]</a>&nbsp;&nbsp;
-            <a href="#">[尾页]</a>
-        </span>
-    </td>
-  </tr>
-</table>
+<%--<table border="0" cellspacing="0" cellpadding="0" align="center">--%>
+  <%--<tr>--%>
+    <%--<td align="right">--%>
+    	<%--<span>第1/3页</span>--%>
+        <%--<span>--%>
+        	<%--<a href="#">[首页]</a>&nbsp;&nbsp;--%>
+            <%--<a href="#">[上一页]</a>&nbsp;&nbsp;--%>
+            <%--<a href="#">[下一页]</a>&nbsp;&nbsp;--%>
+            <%--<a href="#">[尾页]</a>--%>
+        <%--</span>--%>
+    <%--</td>--%>
+  <%--</tr>--%>
+<%--</table>--%>
 
 </body>
 </html>

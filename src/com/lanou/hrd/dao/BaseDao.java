@@ -1,5 +1,7 @@
 package com.lanou.hrd.dao;
 
+import com.lanou.hrd.domain.Staff;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +10,20 @@ import java.util.Map;
  * Created by dllo on 17/10/24.
  */
 public interface BaseDao<T> {
+
+    /**
+     * 获取总记录数
+     */
+    public int getTotalRecord(String condition,Object[] params);
+
+    /**
+     * 获取到数据,带分页参数
+     */
+    public List<T> findAll(String condition, Object[] params, int startIndex, int pageSize);
+
+
+
+
 
     /**
      * 查询所有

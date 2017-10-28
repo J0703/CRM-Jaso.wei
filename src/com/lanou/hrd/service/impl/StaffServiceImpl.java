@@ -1,8 +1,11 @@
 package com.lanou.hrd.service.impl;
 
 import com.lanou.hrd.dao.StaffDao;
+import com.lanou.hrd.domain.Department;
+import com.lanou.hrd.domain.PageBean;
 import com.lanou.hrd.domain.Staff;
 import com.lanou.hrd.service.StaffService;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +22,7 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public Staff login(String name, String pwd) {
-        return staffDao.login(name,pwd);
+        return staffDao.login(name, pwd);
     }
 
     @Override
@@ -27,46 +30,79 @@ public class StaffServiceImpl implements StaffService {
         staffDao.add(staff);
     }
 
-    @Override
-    public List<Staff> findAllStaff() {
-        return staffDao.findAll("from Staff");
-    }
-
-    @Override
-    public List<Staff> findStaff(Staff staff, String depId, String postID) {
-        List<String> params = new ArrayList<>();
-        StringBuilder hql = new StringBuilder("from Staff s where 1=1");
-        //按部门查   或   按部门和职务
-        if (!depId.equals("-1") && postID.equals("-1")){
-
-            hql.append(" and s.post.department.depID =?");
-            params.add(depId);
-        }else if (!depId.equals("-1") && !postID.equals("-1")){
-
-            hql.append(" and s.post.department.depID =?");
-            params.add( depId);
-            hql.append(" and s.post.postId =?");
-            params.add(postID);
-
-        }
-        //姓名查询
-        if (!staff.getStaffName().trim().equalsIgnoreCase("")){
-
-            hql.append(" and staffName like?");
-            params.add(staff.getStaffName());
-        }
-        //无条件,查所有
-        return staffDao.find(hql.toString(),params.toArray());
-    }
 
     @Override
     public Staff findById(Serializable id, Class<Staff> tClass) {
-        return staffDao.findById(id,tClass);
+        return staffDao.findById(id, tClass);
     }
 
     @Override
     public void updateStaff(Staff staff) {
         staffDao.update(staff);
+    }
+
+    @Override
+    public Staff findByName(String loginName) {
+        return staffDao.findByNAme(loginName);
+    }
+
+    @Override
+    public PageBean<Staff> findAll(Staff staff, int pageNum, int pageSize) {
+        if (pageNum == 0) pageNum++;
+        String hql = "select count(d) from Staff d where 1=1";
+        Object[] params = {};
+        String hql2 = "from Staff";
+        //总记录数
+        int totalRecord = staffDao.getTotalRecord(hql, params);
+        System.out.println("总记录数 : " + totalRecord);
+        //创建对象
+        PageBean<Staff> pageBean = new PageBean<Staff>();
+        pageBean.setPageNum(pageNum);
+        pageBean.setPageSize(pageSize);
+        pageBean.setTotalRecord(totalRecord);
+        //分页数据
+        List<Staff> data = staffDao.findAll(hql2, params, pageBean.getStartIndex(), pageBean.getPageSize());
+        //将分页数据封装到pagebean
+        pageBean.setData(data);
+
+        return pageBean;
+    }
+
+    @Override
+    public PageBean<Staff> conFindAll(Staff staff, int pageNum, int pageSize, Map<String, String> conMap) {
+        if (pageNum == 0) pageNum++;
+        StringBuilder sbHql = new StringBuilder();
+        List<String> condition = new ArrayList<>();
+        sbHql.append("from Staff s where 1=1");
+
+        if (!conMap.get("depId").equals("-1")){
+            sbHql.append(" and s.post.department.depID =?");
+            condition.add(conMap.get("depId"));
+        }
+        if (!conMap.get("postID").equals("-1")){
+            sbHql.append(" and s.post.postId =?");
+            condition.add(conMap.get("postID"));
+        }
+        if (!conMap.get("staffName").trim().equals("")){
+            sbHql.append(" and staffName like?");
+            condition.add(conMap.get("staffName"));
+        }
+        String sql = "select count(s) "+sbHql.toString();
+        //总记录数
+        int totalRecord = staffDao.getTotalRecord(sql,condition.toArray() );
+        if (totalRecord==0) totalRecord++;
+        System.out.println("总记录数 : " + totalRecord);
+        //创建对象
+        PageBean<Staff> pageBean = new PageBean<Staff>();
+        pageBean.setPageNum(pageNum);
+        pageBean.setPageSize(pageSize);
+        pageBean.setTotalRecord(totalRecord);
+        //分页数据
+        List<Staff> data = staffDao.findAll(sbHql.toString(), condition.toArray(), pageBean.getStartIndex(), pageBean.getPageSize());
+        //将分页数据封装到pagebean
+        pageBean.setData(data);
+
+        return pageBean;
     }
 
     ///////////////////////////////////////////////////////////////////////
