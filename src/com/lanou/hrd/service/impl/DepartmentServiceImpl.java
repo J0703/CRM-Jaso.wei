@@ -2,7 +2,7 @@ package com.lanou.hrd.service.impl;
 
 import com.lanou.hrd.dao.DepartmentDao;
 import com.lanou.hrd.domain.Department;
-import com.lanou.hrd.domain.PageBean;
+import com.lanou.util.PageBean;
 import com.lanou.hrd.service.DepartmentService;
 
 import java.util.HashMap;

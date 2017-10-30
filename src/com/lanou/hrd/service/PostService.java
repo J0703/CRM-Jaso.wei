@@ -1,10 +1,7 @@
 package com.lanou.hrd.service;
 
-import com.lanou.hrd.domain.Department;
-import com.lanou.hrd.domain.PageBean;
+import com.lanou.util.PageBean;
 import com.lanou.hrd.domain.Post;
-
-import java.util.List;
 
 /**
  * Created by dllo on 17/10/25.

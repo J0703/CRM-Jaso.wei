@@ -32,16 +32,16 @@
   </tr>
 </table>
 
-<form action="/crm2/classesm/classAction_upload.action" method="post" enctype="multipart/form-data">
+<form action="" method="post" enctype="multipart/form-data">
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	  <tr>
 	    <td width="120">课程类别：</td>
-	    <td>JavaEE </td>
+	    <td>${classes1.course.courseName}</td>
 	    <td>&nbsp;</td>
 	  </tr>
 	  <tr>
 	    <td>班级：</td>
-	    <td>J161001期 </td>
+	    <td>${classes1.name}</td>
 	    <td>&nbsp;</td>
 	  </tr>
 	  <tr>

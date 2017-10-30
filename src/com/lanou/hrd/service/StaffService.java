@@ -1,10 +1,9 @@
 package com.lanou.hrd.service;
 
-import com.lanou.hrd.domain.PageBean;
+import com.lanou.util.PageBean;
 import com.lanou.hrd.domain.Staff;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 
 /**

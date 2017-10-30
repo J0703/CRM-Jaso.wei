@@ -22,7 +22,6 @@ import java.util.Map;
 public class CourseAction extends ActionSupport implements ModelDriven<Course> {
     private Course course;
 
-    private String courseTypeID;//要编辑课程id
     private Course course1;//要编辑课程信息,(回显)
 
     //高级查询条件
@@ -66,7 +65,7 @@ public class CourseAction extends ActionSupport implements ModelDriven<Course> {
 
     //表单回填
     public String editCourse() {
-        course1 = courseService.findCourseByID(courseTypeID);
+        course1 = courseService.findCourseByID(course.getCourseTypeID());
         return SUCCESS;
     }
 
@@ -116,13 +115,6 @@ public class CourseAction extends ActionSupport implements ModelDriven<Course> {
         this.course = course;
     }
 
-    public String getCourseTypeID() {
-        return courseTypeID;
-    }
-
-    public void setCourseTypeID(String courseTypeID) {
-        this.courseTypeID = courseTypeID;
-    }
 
     public Course getCourse1() {
         return course1;

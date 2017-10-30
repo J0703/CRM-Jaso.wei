@@ -97,7 +97,7 @@
 								<tr>
 									<td width="51" valign="middle">
 										<font color="#FFFFFF">
-											欢迎您： <s:property value="#session.staffLogin.loginName"/>
+											欢迎您： <s:property value="#application.staffLogin.loginName"/>
 										</font>
 									</td>
 								</tr>

@@ -28,4 +28,8 @@ public class MainTest {
         courseAction.advFindCourse();
 
     }
+    @Test
+    public void test2(){
+        System.out.println(Long.valueOf("2017-11-11".replaceAll("_","")));
+    }
 }

@@ -61,7 +61,7 @@
     <!--5.配置Spring  aop-->
     <aop:config>
         <!--配置切入点-->
-        <aop:pointcut id="pointcut" expression="execution(* com.lanou.hrd.service.impl.*.*(..))"/>
+        <aop:pointcut id="pointcut" expression="execution(* com.lanou.*.service.impl.*.*(..))"/>
         <!--配置通知-->
         <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>
     </aop:config>
@@ -85,6 +85,10 @@
           class="com.lanou.trd.dao.impl.CourseDaoImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    <bean id="classesDao"
+          class="com.lanou.trd.dao.impl.ClassesDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 
     <!--配置service层-->
     <bean id="staffService"
@@ -102,6 +106,10 @@
     <bean id="courseService"
           class="com.lanou.trd.service.impl.CourseServiceImpl">
         <property name="courseDao" ref="courseDao"/>
+    </bean>
+    <bean id="classesService"
+          class="com.lanou.trd.service.impl.ClassesServiceImpl">
+        <property name="classesDao" ref="classesDao"/>
     </bean>
 
 

@@ -1,15 +1,13 @@
 package com.lanou.hrd.service.impl;
 
 import com.lanou.hrd.dao.StaffDao;
-import com.lanou.hrd.domain.Department;
-import com.lanou.hrd.domain.PageBean;
+import com.lanou.util.CrmStringUtils;
+import com.lanou.util.PageBean;
 import com.lanou.hrd.domain.Staff;
 import com.lanou.hrd.service.StaffService;
-import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,11 +20,14 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public Staff login(String name, String pwd) {
-        return staffDao.login(name, pwd);
+        String pwd1 = CrmStringUtils.getMD5Value(pwd);
+        return staffDao.login(name, pwd1);
     }
 
     @Override
     public void addStaff(Staff staff) {
+        String pwd = CrmStringUtils.getMD5Value(staff.getLoginPwd());
+        staff.setLoginPwd(pwd);
         staffDao.add(staff);
     }
 
@@ -38,6 +39,8 @@ public class StaffServiceImpl implements StaffService {
 
     @Override
     public void updateStaff(Staff staff) {
+        String pwd = CrmStringUtils.getMD5Value(staff.getLoginPwd());
+        staff.setLoginPwd(pwd);
         staffDao.update(staff);
     }
 

@@ -1,7 +1,7 @@
 package com.lanou.hrd.action;
 
 import com.lanou.hrd.domain.Department;
-import com.lanou.hrd.domain.PageBean;
+import com.lanou.util.PageBean;
 import com.lanou.hrd.domain.Post;
 import com.lanou.hrd.domain.Staff;
 import com.lanou.hrd.service.DepartmentService;
@@ -86,7 +86,7 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
         if (logStaff != null) {
             //将登录信息存入session
             System.out.println("session中登录人信息 : "+logStaff);
-            ActionContext.getContext().getSession().put("staffLogin",logStaff);
+            ActionContext.getContext().getApplication().put("staffLogin",logStaff);
             return SUCCESS;
         } else {
             addActionError("用户名或密码错误!");
@@ -182,6 +182,7 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
      */
     public String editStaff() {
         staff1 = staffService.findById(staff.getStaffId(), Staff.class);
+        staff1.setLoginPwd("");
         departments = departmentService.findAllDept();
         System.out.println("要编辑的员工 : " + staff1);
 
@@ -213,7 +214,7 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
      */
 
     public String updPwd(){
-        loginStaff  = (Staff) ServletActionContext.getRequest().getSession().getAttribute("staffLogin");
+        loginStaff  = (Staff) ActionContext.getContext().getApplication().get("staffLogin");
         Staff staffServiceById = staffService.findById(loginStaff.getStaffId(), Staff.class);
         System.out.println("已登录的用户 : "+loginStaff);
         Staff staff2 = loginStaff;
@@ -225,7 +226,7 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
     }
 
     public void validateUpdPwd() {
-        loginStaff  = (Staff) ServletActionContext.getRequest().getSession().getAttribute("staffLogin");
+        loginStaff  = (Staff) ActionContext.getContext().getApplication().get("staffLogin");
         Staff staffServiceById = staffService.findById(loginStaff.getStaffId(), Staff.class);
         System.out.println("已登录的用户(yz) : "+loginStaff);
         if (staffService.login(staffServiceById.getLoginName(),oldPassword) == null){
@@ -248,6 +249,7 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
      * @return
      */
     public String outLogin(){
+        ActionContext.getContext().getApplication().remove("staffLogin");
         return SUCCESS;
     }
 

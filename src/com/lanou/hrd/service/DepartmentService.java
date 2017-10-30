@@ -1,7 +1,7 @@
 package com.lanou.hrd.service;
 
 import com.lanou.hrd.domain.Department;
-import com.lanou.hrd.domain.PageBean;
+import com.lanou.util.PageBean;
 
 import java.util.List;
 

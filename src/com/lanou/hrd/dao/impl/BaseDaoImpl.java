@@ -1,10 +1,9 @@
 package com.lanou.hrd.dao.impl;
 
 import com.lanou.hrd.dao.BaseDao;
-import com.lanou.hrd.page.PageHibernateCallback;
+import com.lanou.util.PageHibernateCallback;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

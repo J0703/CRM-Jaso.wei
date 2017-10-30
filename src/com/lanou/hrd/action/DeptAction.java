@@ -1,7 +1,7 @@
 package com.lanou.hrd.action;
 
 import com.lanou.hrd.domain.Department;
-import com.lanou.hrd.domain.PageBean;
+import com.lanou.util.PageBean;
 import com.lanou.hrd.service.DepartmentService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -37,8 +37,7 @@ public class DeptAction extends ActionSupport implements ModelDriven<Department>
     /**
      * 查询所有部门
      */
-    @Override
-    public String execute() throws Exception {
+    public String findAllDept() {
         PageBean<Department> pageBean = departmentService.findAll(department, pageNum, pageSize);
         System.out.println("pageBean : "+pageBean);
         ActionContext.getContext().put("pageBean",pageBean);

@@ -1,5 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -22,7 +25,7 @@
     <td width="42%"align="center">&nbsp;</td>
     <td width="36%"align="right">
     	<%--添加班级  /html/classesm/addClass.jsp--%>
-    	<a href="${pageContext.request.contextPath}/pages/classesm/addOrEditClass.jsp">
+    	<a href="${pageContext.request.contextPath}/findCourse.action">
     		<img src="${pageContext.request.contextPath}/images/button/tianjia.gif" class="img"/>
     	</a>
     	<%--高级查询 
@@ -62,31 +65,36 @@
   </tr>
   </thead>
   <tbody>
+  <s:set value="new java.util.Date()" var="nowDate"></s:set>
+  <c:forEach items="${classesList}" var="cla">
 	  <tr class="tabtd2">
-	    <td align="center">J161001期</td>
-	    <td align="center">JavaEE </td>
-	    <td align="center">2016-10-10</td>
-	    <td align="center">2016-11-1</td>
-	    <td align="center">已结束</td>
-	    <td align="center">1 </td>
-	    <td align="center">2 </td>
-	    <td align="center">0 </td>
+	    <td align="center">${cla.name}</td>
+	    <td align="center">${cla.course.courseName}</td>
+	    <td id="sTime" align="center">${cla.startTime}</td>
+	    <td id="eTime" align="center">${cla.endTime}</td>
 	    <td align="center">
-	    	<a href="${pageContext.request.contextPath}/pages/classesm/addOrEditClass.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>
+            <s:if test="Long.valueOf(cla.endTime.replaceAll('_','') < Long.valueOf(cla.startTime.replaceAll('-', ''))">*未开班</s:if>
+            <s:elseif test="cla.endTime.getTime() < #nowDate.getTime()">已结束</s:elseif>
+            <s:else>进行中~</s:else>
+        </td>
+	    <td align="center">${cla.totalCount}</td>
+	    <td align="center">${cla.upgradeCount}</td>
+	    <td align="center">${cla.changeCount}</td>
+	    <td align="center">
+	    	<a href="${pageContext.request.contextPath}/editClasses.action?classID=${cla.classID}"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>
 	    </td>
 		<td align="center">
-	    	<a href="${pageContext.request.contextPath}/pages/classesm/showClass.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>
+	    	<a href="${pageContext.request.contextPath}/pages/hint.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>
 		</td>
 		<td align="center" title="上次上传时间：2015-04-02">   
-			<a href="${pageContext.request.contextPath}/pages/classesm/uploadClass.jsp">上传</a>
-			<a href="${pageContext.request.contextPath}/pages/classesm/downloadClass">下载</a> <br/>
+			<a href="${pageContext.request.contextPath}/upLoad.action?classID=${cla.classID}">上传</a>
+			<a href="${pageContext.request.contextPath}">下载</a> <br/>
 		</td>
 	  </tr>
-
+  </c:forEach>
   
   </tbody>
 </table>
-
 
 <%--<table border="0" cellspacing="0" cellpadding="0" align="center">--%>
   <%--<tr>--%>

@@ -1,7 +1,7 @@
 package com.lanou.hrd.action;
 
 import com.lanou.hrd.domain.Department;
-import com.lanou.hrd.domain.PageBean;
+import com.lanou.util.PageBean;
 import com.lanou.hrd.domain.Post;
 import com.lanou.hrd.service.DepartmentService;
 import com.lanou.hrd.service.PostService;
@@ -56,8 +56,7 @@ public class PostAction extends ActionSupport implements ModelDriven<Post>{
      * 显示所有职务
      * @return
      */
-    @Override
-    public String execute() throws Exception {
+    public String findAllPost() {
 
         PageBean<Post> pageBean = postService.findAll(post, pageNum, pageSize);
         System.out.println("pageBean : "+pageBean);

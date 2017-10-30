@@ -11,24 +11,27 @@
     <!--将struts2中的对象创建交给spring完成-->
     <constant name="struts.objectFactory" value="spring"/>
 
-
-    <!--人力资源部-->
-    <package name="HRD" extends="json-default">
-
-
+    <package name="myInterceptor" extends="struts-default">
         <interceptors>
-            <!--声明登录拦截器-->
+            <!--1.声明登录拦截器-->
             <interceptor name="loginCheck" class="com.lanou.hrd.interceptor.LoginInterceptor"/>
+            <!--2.操作权限拦截器-->
+            <interceptor name="actionInterceptor" class="com.lanou.hrd.interceptor.ActionInterceptor"/>
 
 
             <!--声明一个拦截器集合, 将多个拦截器放在一个stack栈中-->
             <interceptor-stack name="myInterceptorStack">
 
-                <!--.登录拦截器加入自定义拦截器栈-->
+                <!--1.登录拦截器加入自定义拦截器栈-->
                 <interceptor-ref name="loginCheck">
                     <!--添加拦截条件-->
-                    <!--排除拦截方法, 多个方法 , 隔开-->
-                    <param name="excludeMethods">login,findAllDept,findAllPost,listStaff</param>
+                    <param name="excludeMethods">login</param>
+                    <!--拦截方法指定, 多个方法 , 隔开-->
+                    <!--<param name="includeMethods"></param>-->
+                </interceptor-ref>
+                <!--2.将操作权限拦截器加入自定义拦截器栈-->
+                <interceptor-ref name="actionInterceptor">
+                    <param name="excludeMethods">login,updPwd,findAllDept,findAllPost,listStaff,findAllCourse,findAllClasses,outLogin</param>
                 </interceptor-ref>
 
                 <!--***将struts提供的默认拦截器栈加入自定义拦截器栈在 此种方式保证了原来struts提供的拦截器仍然好用
@@ -37,11 +40,15 @@
 
             </interceptor-stack>
         </interceptors>
+    </package>
+
+    <!--人力资源部-->
+    <package name="HRD" extends="json-default,myInterceptor">
 
         <default-interceptor-ref name="myInterceptorStack"/>
         <global-results>
             <result name="login">/pages/login.jsp</result>
-            <result name="error">/pages/error.jsp</result>
+            <result name="No permission">/pages/error.jsp</result>
         </global-results>
 
 
@@ -54,7 +61,7 @@
         </action>
 
         <!--查询所有部门-->
-        <action name="findAllDept" class="com.lanou.hrd.action.DeptAction">
+        <action name="findAllDept" class="com.lanou.hrd.action.DeptAction" method="findAllDept">
             <result name="success">pages/department/listDepartment.jsp</result>
         </action>
         <!--添加/编辑部门-->
@@ -65,7 +72,7 @@
 
 
         <!--查询所有职务-->
-        <action name="findAllPost" class="com.lanou.hrd.action.PostAction">
+        <action name="findAllPost" class="com.lanou.hrd.action.PostAction" method="findAllPost">
             <result name="success">pages/post/listPost.jsp</result>
         </action>
         <!--添加/编辑职务-->
@@ -129,7 +136,13 @@
     </package>
 
     <!--教研部-->
-    <package name="TRD" extends="json-default">
+    <package name="TRD" extends="json-default,myInterceptor">
+
+        <default-interceptor-ref name="myInterceptorStack"/>
+        <global-results>
+            <result name="login">/pages/login.jsp</result>
+            <result name="No permission">/pages/error.jsp</result>
+        </global-results>
 
         <!--添加/编辑课程-->
         <action name="addOrEditCourse" class="courseAction" method="addOrEditCourse">
@@ -147,6 +160,28 @@
         <!--高级查询-->
         <action name="advFindCourse" class="courseAction" method="advFindCourse">
             <result name="success">/pages/coursetype/listCourse.jsp</result>
+        </action>
+
+
+        <!--查询所有班级-->
+        <action name="findAllClasses" class="classesAction" method="findAllClasses">
+            <result name="success">/pages/classesm/listClass.jsp</result>
+        </action>
+        <!--添加班级-->
+        <action name="findCourse" class="classesAction" method="findCourse">
+            <result name="success">/pages/classesm/addOrEditClass.jsp</result>
+        </action>
+        <action name="addClasses" class="classesAction" method="addClasses">
+            <result name="success" type="redirectAction">findAllClasses</result>
+            <result name="input">/pages/classesm/addOrEditClass.jsp</result>
+        </action>
+        <!--编辑班级-->
+        <action name="editClasses" class="classesAction" method="editClasses">
+            <result name="success">/pages/classesm/addOrEditClass.jsp</result>
+        </action>
+        <!--上传-->
+        <action name="upLoad" class="classesAction" method="upLoad">
+            <result name="success">/pages/classesm/uploadClass.jsp</result>
         </action>
     </package>
 

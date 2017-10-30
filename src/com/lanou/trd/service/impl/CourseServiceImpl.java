@@ -62,7 +62,7 @@ public class CourseServiceImpl implements CourseService {
         }
         if (!StringUtils.isBlank(course.getRemark())){
             sbHQL.append(" and remark like ?");
-            param.add(course.getRemark());
+            param.add("%"+course.getRemark()+"%");
         }
         if ((int)params.get("totalStart") != 0){
             sbHQL.append(" and total >=?");

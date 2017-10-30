@@ -70,6 +70,8 @@ public class Staff {
                 ", staffName='" + staffName + '\'' +
                 ", gender='" + gender + '\'' +
                 ", onDutyDate=" + onDutyDate +
+                ", department=" + department +
+                ", post=" + post +
                 '}';
     }
 

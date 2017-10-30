@@ -1,8 +1,7 @@
 package com.lanou.hrd.service.impl;
 
 import com.lanou.hrd.dao.PostDao;
-import com.lanou.hrd.domain.Department;
-import com.lanou.hrd.domain.PageBean;
+import com.lanou.util.PageBean;
 import com.lanou.hrd.domain.Post;
 import com.lanou.hrd.service.PostService;
 

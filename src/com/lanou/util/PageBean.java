@@ -1,4 +1,4 @@
-package com.lanou.hrd.domain;
+package com.lanou.util;
 
 import java.util.List;
 
