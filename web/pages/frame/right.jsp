@@ -23,10 +23,10 @@ setInterval("timeStr=new Date().toLocaleString();timer.innerText=timeStr;",1000)
 		<tr>
 			<td> 
 			<font size="6" color="#ffffff">
-						欢迎使用CRM系统
+						{欢迎使用CRM系统}
 			</font>  
 
-			<p id="timer" style="font:48px tahoma;height:10px;" />
+			<p id="timer" style="font:48px tahoma;height:10px; color : white;" />
 			</td>
 		</tr>
 	</table>

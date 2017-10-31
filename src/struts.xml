@@ -183,6 +183,25 @@
         <action name="upLoad" class="classesAction" method="upLoad">
             <result name="success">/pages/classesm/uploadClass.jsp</result>
         </action>
+        <action name="scheduleUpLoad" class="classesAction" method="scheduleUpLoad">
+            <!--重写默认拦截器栈, 修改默认拦截器栈中的某个拦截器属性-->
+            <interceptor-ref name="defaultStack">
+                <!--重新设置上床文件的大小-->
+                <param name="fileUpload.maximumSize">10485760</param>
+                <!--重新设置上传文件的后缀, 多个用 , 隔开-->
+                <param name="fileUpload.allowedExtensions">.png,.jpg,.jpeg</param>
+            </interceptor-ref>
+            <result name="input" type="chain">upLoad</result>
+            <result name="success" type="chain">findAllClasses</result>
+        </action>
+        <!--下载-->
+        <action name="downLoad" class="classesAction" method="downLoad">
+            <result name="success" type="stream">
+                <param name="inputStream">inputStream</param>
+                <param name="contentDisposition">attachment;filename=${fileName}</param>
+                <param name="contentType">application/octet-stream</param>
+            </result>
+        </action>
     </package>
 
 </struts>

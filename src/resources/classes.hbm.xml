@@ -9,8 +9,8 @@
             <generator class="uuid"/>
         </id>
         <property name="name"/>
-        <property name="startTime"/>
-        <property name="endTime"/>
+        <property name="startTime" type="date"/>
+        <property name="endTime" type="date"/>
         <property name="status"/>
         <property name="totalCount"/>
         <property name="upgradeCount"/>

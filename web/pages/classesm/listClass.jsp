@@ -73,9 +73,7 @@
 	    <td id="sTime" align="center">${cla.startTime}</td>
 	    <td id="eTime" align="center">${cla.endTime}</td>
 	    <td align="center">
-            <s:if test="Long.valueOf(cla.endTime.replaceAll('_','') < Long.valueOf(cla.startTime.replaceAll('-', ''))">*未开班</s:if>
-            <s:elseif test="cla.endTime.getTime() < #nowDate.getTime()">已结束</s:elseif>
-            <s:else>进行中~</s:else>
+           ${cla.status}
         </td>
 	    <td align="center">${cla.totalCount}</td>
 	    <td align="center">${cla.upgradeCount}</td>
@@ -88,7 +86,7 @@
 		</td>
 		<td align="center" title="上次上传时间：2015-04-02">   
 			<a href="${pageContext.request.contextPath}/upLoad.action?classID=${cla.classID}">上传</a>
-			<a href="${pageContext.request.contextPath}">下载</a> <br/>
+			<a href="${pageContext.request.contextPath}/downLoad.action?fileName=${cla.course.courseName}.png">下载</a> <br/>
 		</td>
 	  </tr>
   </c:forEach>

@@ -41,7 +41,6 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
     @Qualifier("postService")
     private PostService postService;
 
-
     private List<Department> departments;//查到的部门集合
     private String departid;//部门id,用来查找对应职务
     private Set<Post> posts;//根据部门id查到的职务集合
@@ -51,14 +50,15 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
     private String depId;//要编辑员工部门id
     private Staff staff1;//要编辑的员工
 
-    private String oldPassword;
-    private String newPassword;
-    private String reNewPassword;
-    private Staff loginStaff;
+    private String oldPassword;//旧密码
+    private String newPassword;//新密码
+    private String reNewPassword;//确认新密码
+
+    private Staff loginStaff;//存入域中登录对象
 
     private int pageNum;//第一页开始
     private int pageSize=3;//每页显示三条
-    private Map<String, String> conMap;
+    private Map<String, String> conMap;//参数集合
 
     public int getPageNum() {
         return pageNum;

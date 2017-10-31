@@ -11,7 +11,7 @@ public class Classes {
     private String classID;//主键
     private String name;//班级名称
     private Date startTime;//开班时间
-    private String endTime;//毕业时间
+    private Date endTime;//毕业时间
     private String status;//状态
     private int totalCount;//学生总数
     private int upgradeCount;//升级数
@@ -34,7 +34,7 @@ public class Classes {
 
     }
 
-    public Classes(String name, Date startTime, String endTime, String status, int totalCount, int upgradeCount, int changeCount, int runoffCount, String remark, String uploadPath, String uploadFileName, Date uploadTime) {
+    public Classes(String name, Date startTime, Date endTime, String status, int totalCount, int upgradeCount, int changeCount, int runoffCount, String remark, String uploadPath, String uploadFileName, Date uploadTime) {
         this.name = name;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -49,7 +49,7 @@ public class Classes {
         this.uploadTime = uploadTime;
     }
 
-    public Classes(String name, Date startTime, String endTime, String status, int totalCount, int upgradeCount, int changeCount, int runoffCount, String remark, String uploadPath, String uploadFileName, Date uploadTime, Course course) {
+    public Classes(String name, Date startTime, Date endTime, String status, int totalCount, int upgradeCount, int changeCount, int runoffCount, String remark, String uploadPath, String uploadFileName, Date uploadTime, Course course) {
 
         this.name = name;
         this.startTime = startTime;
@@ -66,7 +66,7 @@ public class Classes {
         this.course = course;
     }
 
-    public Classes(String classID, String name, Date startTime, String endTime, String status, int totalCount, int upgradeCount, int changeCount, int runoffCount, String remark, String uploadPath, String uploadFileName, Date uploadTime, Course course) {
+    public Classes(String classID, String name, Date startTime, Date endTime, String status, int totalCount, int upgradeCount, int changeCount, int runoffCount, String remark, String uploadPath, String uploadFileName, Date uploadTime, Course course) {
 
         this.classID = classID;
         this.name = name;
@@ -116,11 +116,11 @@ public class Classes {
         this.startTime = startTime;
     }
 
-    public String getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 

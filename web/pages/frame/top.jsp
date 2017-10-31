@@ -96,8 +96,8 @@
 							<table border="0" width="215" cellspacing="0" cellpadding="0" id="table6" height="23">
 								<tr>
 									<td width="51" valign="middle">
-										<font color="#FFFFFF">
-											欢迎您： <s:property value="#application.staffLogin.loginName"/>
+										<font color="#a52a2a" style="font-size: 20px">
+											欢迎您： <s:property value="#application.staffLogin.staffName"/>
 										</font>
 									</td>
 								</tr>
