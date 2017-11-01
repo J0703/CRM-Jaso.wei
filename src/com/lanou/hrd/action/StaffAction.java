@@ -1,6 +1,7 @@
 package com.lanou.hrd.action;
 
 import com.lanou.hrd.domain.Department;
+import com.lanou.util.CrmStringUtils;
 import com.lanou.util.PageBean;
 import com.lanou.hrd.domain.Post;
 import com.lanou.hrd.domain.Staff;
@@ -85,7 +86,7 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
         Staff logStaff = staffService.login(staff.getLoginName(), staff.getLoginPwd());
         if (logStaff != null) {
             //将登录信息存入session
-            System.out.println("session中登录人信息 : "+logStaff);
+            System.out.println("域中登录人信息 : "+logStaff);
             ActionContext.getContext().getApplication().put("staffLogin",logStaff);
             return SUCCESS;
         } else {
@@ -235,7 +236,7 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
         if (!newPassword.equals(reNewPassword)) {
             addActionError("两次输入密码不同!请重新输入!");
         }
-        if (staffServiceById.getLoginPwd().equals(reNewPassword)){
+        if (staffServiceById.getLoginPwd().equals(CrmStringUtils.getMD5Value(reNewPassword))){
             addActionError("新密码不得与旧密码相同!");
         }
         if (oldPassword.trim().equals("") || newPassword.trim().equals("") || reNewPassword.trim().equals("")){
