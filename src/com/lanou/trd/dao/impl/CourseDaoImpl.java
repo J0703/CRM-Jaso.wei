@@ -1,6 +1,6 @@
 package com.lanou.trd.dao.impl;
 
-import com.lanou.hrd.dao.impl.BaseDaoImpl;
+import com.lanou.base.impl.BaseDaoImpl;
 import com.lanou.trd.dao.CourseDao;
 import com.lanou.trd.domain.Course;
 

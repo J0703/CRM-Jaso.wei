@@ -1,11 +1,10 @@
 package com.lanou.hrd.dao.impl;
 
+import com.lanou.base.impl.BaseDaoImpl;
 import com.lanou.hrd.dao.StaffDao;
 import com.lanou.hrd.domain.Staff;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by dllo on 17/10/25.

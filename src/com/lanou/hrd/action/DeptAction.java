@@ -17,6 +17,8 @@ import java.util.List;
 public class DeptAction extends ActionSupport implements ModelDriven<Department> {
 
     private Department department;//bean
+
+
     private int pageNum;//第一页开始
     private int pageSize=3;//每页显示三条
 

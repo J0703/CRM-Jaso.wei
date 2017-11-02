@@ -1,5 +1,6 @@
 package com.lanou.hrd.dao;
 
+import com.lanou.base.BaseDao;
 import com.lanou.hrd.domain.Post;
 
 /**

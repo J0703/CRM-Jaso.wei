@@ -63,6 +63,7 @@ public class ClassesAction extends ActionSupport implements ModelDriven<Classes>
         if (schedule == null){
             return INPUT;
         }
+        //上传路径
         String path = ServletActionContext.getServletContext().getRealPath("schedule");
 
         File destDirectory = new File(path);
@@ -82,6 +83,7 @@ public class ClassesAction extends ActionSupport implements ModelDriven<Classes>
      * 下载
      */
     public String downLoad(){
+        //下载路径
         String dirPath = ServletActionContext.getServletContext().getRealPath("schedule");
         File file = new File(dirPath,fileName);
         try {

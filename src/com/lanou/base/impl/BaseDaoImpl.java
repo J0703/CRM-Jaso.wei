@@ -1,6 +1,6 @@
-package com.lanou.hrd.dao.impl;
+package com.lanou.base.impl;
 
-import com.lanou.hrd.dao.BaseDao;
+import com.lanou.base.BaseDao;
 import com.lanou.util.PageHibernateCallback;
 import org.hibernate.Query;
 import org.hibernate.Session;

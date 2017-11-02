@@ -183,7 +183,7 @@ public class StaffAction extends ActionSupport implements ModelDriven<Staff> {
      */
     public String editStaff() {
         staff1 = staffService.findById(staff.getStaffId(), Staff.class);
-        staff1.setLoginPwd("");
+        staff1.setLoginPwd("123");
         departments = departmentService.findAllDept();
         System.out.println("要编辑的员工 : " + staff1);
 

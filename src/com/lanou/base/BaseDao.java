@@ -1,4 +1,4 @@
-package com.lanou.hrd.dao;
+package com.lanou.base;
 
 import com.lanou.hrd.domain.Staff;
 

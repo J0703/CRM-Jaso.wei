@@ -11,6 +11,7 @@
     <!--将struts2中的对象创建交给spring完成-->
     <constant name="struts.objectFactory" value="spring"/>
 
+    <!--拦截器-->
     <package name="myInterceptor" extends="struts-default">
         <interceptors>
             <!--1.声明登录拦截器-->

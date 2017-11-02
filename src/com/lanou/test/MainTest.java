@@ -30,6 +30,8 @@ public class MainTest {
     }
     @Test
     public void test2(){
-        System.out.println(Long.valueOf("2017-11-11".replaceAll("_","")));
+        double a=3.0;
+        int b = 4;
+        System.out.println(a/=b);
     }
 }
